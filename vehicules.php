@@ -9,19 +9,19 @@
     <script src="https://kit.fontawesome.com/60d2a6fbef.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./Styles/vehiculesStyle.css">
     <title>Garage V.Parrot</title>
-    <link rel="shortcut icon" href="../Images/icon-garage.png">
+    <link rel="shortcut icon" href="./Images/icon-garage.png">
 </head>
 <body>
     <nav id="navigation">
-        <a href="index.html"><img src="Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
-        <a href="index.html"><img src="Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
+        <a href="./index.php"><img src="./Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
+        <a href="./index.php"><img src="./Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
         <h1>Garage V.PARROT</h1>
         <div>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="vehicules.html" style="color: #D92332">Véhicules</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="Connexion/connexion.html">Connexion</a></li>
+                <li><a href="./index.php">Accueil</a></li>
+                <li><a href="./vehicules.php" style="color: #D92332">Véhicules</a></li>
+                <li><a href="./contact.php">Contact</a></li>
+                <li><a href="./Connexion/connexion.php">Connexion</a></li>
             </ul>
         </div>
     </nav>
@@ -95,10 +95,10 @@
             </div>
             <div class="nav-link">
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="vehicules.html">Véhicules</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="Connexion/connexion.html">Connexion</a></li>
+                    <li><a href="./index.php">Accueil</a></li>
+                    <li><a href="./vehicules.php">Véhicules</a></li>
+                    <li><a href="./contact.php">Contact</a></li>
+                    <li><a href="./Connexion/connexion.php">Connexion</a></li>
                 </ul>
             </div>
         </div>

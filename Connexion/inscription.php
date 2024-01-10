@@ -13,15 +13,15 @@
 </head>
 <body>
     <nav id="navigation">
-        <a href="index.html"><img src="../Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
-        <a href="index.html"><img src="../Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
+        <a href="../index.php"><img src="../Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
+        <a href="../index.php"><img src="../Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
         <h1>Garage V.PARROT</h1>
         <div>
             <ul>
-                <li><a href="../index.html">Accueil</a></li>
-                <li><a href="#">Véhicules</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-                <li><a href="connexion.html" style="color: #D92332">Connexion</a></li>
+                <li><a href="../index.php">Accueil</a></li>
+                <li><a href="../vehicules.php">Véhicules</a></li>
+                <li><a href="../contact.php">Contact</a></li>
+                <li><a href="./connexion.php" style="color: #D92332">Connexion</a></li>
             </ul>
         </div>
     </nav>
@@ -42,7 +42,7 @@
                     <input type="password" name="password" required>
                 </div>
                 <button type="submit">S'inscrire</button>
-                <a href="connexion.html">Déja inscrit? Se connecter.</a>
+                <a href="./connexion.php">Déja inscrit? Se connecter.</a>
             </form>
         </div>
     </main>
@@ -62,10 +62,10 @@
             </div>
             <div class="nav-link">
                 <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="#">Véhicules</a></li>
-                    <li><a href="../contact.html">Contact</a></li>
-                    <li><a href="connexion.html">Connexion</a></li>
+                    <li><a href="../index.php">Accueil</a></li>
+                    <li><a href="../vehicules.php">Véhicules</a></li>
+                    <li><a href="../contact.php">Contact</a></li>
+                    <li><a href="./connexion.php">Connexion</a></li>
                 </ul>
             </div>
         </div>
