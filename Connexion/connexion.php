@@ -1,3 +1,53 @@
+<?php 
+session_start();
+if(isset($_GET['logout'])) {
+    session_destroy();
+}
+
+$dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
+$username = 'psp';
+$password = 'PSP2001/';
+
+if(isset($_POST['connexion'])) {
+    try {
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //Récupération des données du formulaire
+        $formEmail = $_POST['email'];
+        $formPassword = $_POST['password'];
+        //Requette SQL
+        $stmtConnect = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+        $stmtConnect->bindParam(':email', $formEmail);
+        $stmtConnect->execute();
+        //Création de variables pour afficher le message dans le formulaire
+        $correctPass = true;
+        $correctEmail= true;
+        //Vérification de l'email dans la base de donnée
+        if($stmtConnect->rowCount() == 1) {
+            $user = $stmtConnect->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($formPassword, $user['password'])) {
+                //Vérification du role de l'utilisateur
+                $stmtRole = $pdo->prepare('SELECT * FROM roles_users WHERE user_id = :id');
+                $stmtRole->bindParam(':id', $user['idUser']);
+                $stmtRole->execute();
+                $role = $stmtRole->fetch(PDO::FETCH_ASSOC);
+                //Création des variables de session
+                $_SESSION['nom'] = $user['nom'];
+                $_SESSION['prenom'] = $user['prenom'];
+                $_SESSION['role'] = $role['role_id'];
+                header('location: http://localhost/ECF-V.parrot/index.php');
+            }else {
+                $correctPass = false;
+            }
+        }else {
+            $correctEmail = false;
+        }
+    }catch(PDOException $e) {
+        echo 'Erreur lors de la connexion à la base de donnée: '. $e->getMessage();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +78,7 @@
     <main>
         <div class="connexion">
             <h1>Connexion</h1>
-            <form>
+            <form action="./connexion.php" method="POST">
                 <div>
                     <label for="email">Adresse Email</label>
                     <input type="email" name="email" required>
@@ -37,8 +87,20 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" required>
                 </div>
-                <button type="submit">Se connecter</button>
+                <button type="submit" name="connexion">Se connecter</button>
                 <a href="./inscription.php">S'inscrire</a>
+                <h2>
+                <?php
+                    if(isset($_POST['connexion'])) {
+                        if($correctPass === false) {
+                            echo "Mot de passe incorrect.";
+                        }
+                        if($correctEmail === false) {
+                            echo "Utilisateur introuvable.";
+                        }
+                    }
+                ?>
+                </h2>
             </form>
         </div>
     </main>

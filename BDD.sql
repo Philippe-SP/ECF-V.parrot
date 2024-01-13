@@ -12,9 +12,10 @@ CREATE TABLE users
     password VARCHAR(250) NOT NULL
 );
 
---Insertion de Vincent Parrot
+--Insertion de Vincent Parrot et d'un employé
 --Hash du mot de passe trouvé grace a un convertisseur Bcrypt pour qu'il fonctionne avec le formulaire de connexion
 INSERT INTO users (idUser, nom, prenom, email, password) VALUES (UUID(), 'Parrot', 'Vincent', 'vincentParrot@mail.com','$2y$10$YsqTJvIpmvD0l3YcTbRxQONlg3.NcsQKS3Bfxqm.OIizDVxe17/fm');
+INSERT INTO users (idUser, nom, prenom, email, password) VALUES (UUID(), 'Doe', 'John', 'johnDoe@mail.com', '$2y$10$7t3Hks7KblGa8dCDX9UyAOQ8fP7C7PqNpxgS2fAyCVXziS9rONHJu');
 
 CREATE TABLE roles
 (
@@ -39,3 +40,4 @@ CREATE TABLE roles_users
 
 --Attribution du role a Vincent Parrot
 INSERT INTO roles_users (user_id, role_id) VALUES ('cac48ef6-afd7-11ee-99c7-525400536f6e', 1);
+INSERT INTO roles_users (user_id, role_id) VALUES ('76017c4f-b16e-11ee-99c7-525400536f6e', 2);

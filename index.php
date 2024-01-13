@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +21,24 @@
         <a href="./index.php"><img src="./Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
         <h1>Garage V.PARROT</h1>
         <div>
+            <?php 
+                if(isset($_SESSION['nom'])) {
+                    echo "<h3><i class='fa-solid fa-user'></i>".$_SESSION['prenom'].' '.$_SESSION['nom']."</h3>";
+                };
+            ?>
             <ul>
                 <li><a href="./index.php" style="color: #D92332">Accueil</a></li>
                 <li><a href="./vehicules.php">Véhicules</a></li>
                 <li><a href="./contact.php">Contact</a></li>
+                <?php if(!isset($_SESSION['nom'])) { ?>
                 <li><a href="./Connexion/connexion.php">Connexion</a></li>
+                <?php } else { 
+                    if($_SESSION['role'] == 1) {
+                ?>
+                <li><a href="#">Admin</a></li>
+                <?php }; ?>
+                <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
+                <?php }; ?>
             </ul>
         </div>
     </nav>
@@ -110,7 +127,15 @@
                     <li><a href="./index.php">Accueil</a></li>
                     <li><a href="./vehicules.php">Véhicules</a></li>
                     <li><a href="./contact.php">Contact</a></li>
+                    <?php if(!isset($_SESSION['nom'])) { ?>
                     <li><a href="./Connexion/connexion.php">Connexion</a></li>
+                    <?php } else { 
+                        if($_SESSION['role'] == 1) {
+                    ?>
+                    <li><a href="#">Admin</a></li>
+                    <?php }; ?>
+                    <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
+                    <?php }; ?>
                 </ul>
             </div>
         </div>
