@@ -35,7 +35,7 @@ session_start();
                 <?php } else { 
                     if($_SESSION['role'] == 1) {
                 ?>
-                <li><a href="#">Admin</a></li>
+                <li><a href="./admin.php">Admin</a></li>
                 <?php }; ?>
                 <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
                 <?php }; ?>

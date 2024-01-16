@@ -88,7 +88,6 @@ if(isset($_POST['connexion'])) {
                     <input type="password" name="password" required>
                 </div>
                 <button type="submit" name="connexion">Se connecter</button>
-                <a href="./inscription.php">S'inscrire</a>
                 <h2>
                 <?php
                     if(isset($_POST['connexion'])) {

@@ -59,7 +59,7 @@ body {
     margin: auto 10px auto 10px;
     text-decoration: underline transparent;
     text-decoration-thickness: 2px;
-    text-underline-offset: 7px;
+    text-underline-offset: 2px;
     transition: 1s;
 }
 
@@ -156,17 +156,6 @@ main {
     box-shadow: 1px 1px 3px 1px #D92332;
 }
 
-.connexion form a {
-    color: #F2F2F2;
-    transition: 1s;
-}
-
-.connexion form a:hover {
-    color: #D92332;
-    transition: 0.5s;
-
-}
-
 .connexion form h2 {
     color: #D92332;
     margin-top: 10px;
@@ -228,7 +217,7 @@ main {
     margin: auto 20px auto 20px;
     text-decoration: underline transparent;
     text-decoration-thickness: 2px;
-    text-underline-offset: 10px;
+    text-underline-offset: 2px;
     transition: 1s;
 }
 
@@ -240,7 +229,7 @@ main {
     color: #D94350;
     text-decoration: underline;
     text-decoration-thickness: 2px;
-    text-underline-offset: 10px;
+    text-underline-offset: 7px;
     transition: 0.5s;
 }
 
