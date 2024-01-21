@@ -63,28 +63,35 @@ session_start();
         </main>
         <h2>Par formulaire de contact</h2>
         <main class="form-contact">
-            <form>
+            <form action="./Back/BDDcontact.php" method="POST">
                 <div>
                     <label for="nom">Nom</label>
-                    <input type="text" name="nom">
+                    <input type="text" name="nom" required>
                 </div>
                 <div>
                     <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom">
+                    <input type="text" name="prenom" required>
                 </div>
                 <div>
                     <label for="email">Adresse Email</label>
-                    <input type="email" name="email">
+                    <input type="email" name="email" required>
                 </div>
                 <div>
                     <label for="tel">N° de téléphone</label>
-                    <input type="tel" name="tel">
+                    <input type="tel" name="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="01 23 45 67 89" required>
                 </div>
                 <div>
                     <label for="message">Message</label>
-                    <textarea name="message"></textarea>
+                    <textarea name="message" required></textarea>
                 </div>
                 <button type="submit">Envoyer</button>
+                <h2>
+                <?php 
+                if(isset($_GET['messageSend'])) {
+                    echo "Message envoyé avec succès!";
+                } 
+                ?>
+                </h2>
             </form>
         </main>
     <footer class="footer">

@@ -1,5 +1,29 @@
 <?php
 session_start();
+
+$dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
+$username = 'psp';
+$password = 'PSP2001/';
+
+//Récupération des messages recus et non lu depuis la page contact
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmtMessages = $pdo->prepare('SELECT * FROM messages WHERE messageSee = 0');
+    $stmtMessages->execute();
+
+    //Changement des messages "non lu" à "lu"
+    if(isset($_POST['lu'])) {
+        $formMessageId = $_POST['messageId'];
+        $stmtMessageLu = $pdo->prepare('UPDATE messages SET messageSee = 1 WHERE id = :id');
+        $stmtMessageLu->bindParam(':id', $formMessageId);
+        $stmtMessageLu->execute();
+    }
+} catch(PDOException $e) {
+    echo 'Erreu lors de la connexion à la base de donnée'. $e->getMessage();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -122,21 +146,17 @@ session_start();
         </div>
         <div id="messagerie">
             <h2>Messagerie</h2>
+            <?php while ($messagesList = $stmtMessages->fetch(PDO::FETCH_ASSOC)) { ?>
             <div>
-                <h3>Nom / Prenom du gars</h3>
-                <h3>Email / Tel du gars</h3>
-                <p>Message du gars</p>
+                <h3><?php echo "<i class='fa-solid fa-user'></i>".$messagesList['prenom']." ".$messagesList['nom']; ?></h3>
+                <h3><?php echo $messagesList['email']." / ".$messagesList['tel']; ?></h3>
+                <p><?php echo $messagesList['message']; ?></p>
+                <form action="./admin.php" method="POST">
+                    <input hidden type="number" name="messageId" value="<?php echo $messagesList['id']; ?>">
+                    <button class="messagerieBtn" type="submit" name="lu">Marquer comme lu</button>
+                </form>
             </div>
-            <div>
-                <h3>Nom / Prenom du gars</h3>
-                <h3>Email / Tel du gars</h3>
-                <p>Message du gars</p>
-            </div>
-            <div>
-                <h3>Nom / Prenom du gars</h3>
-                <h3>Email / Tel du gars</h3>
-                <p>Message du gars</p>
-            </div>
+            <?php }; ?>
         </div>
         <div id="avis">
             <h2>Avis des clients</h2>

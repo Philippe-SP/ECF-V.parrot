@@ -190,6 +190,13 @@ h2 {
     box-shadow: 1px 1px 3px 1px #D92332;
 }
 
+.form-contact form h2 {
+    color: #F2F2F2;
+    font-size: 24px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    text-align: center;
+}
+
 /* Pied de page */
 .footer {
     background-color: #262526;
