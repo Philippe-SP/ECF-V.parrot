@@ -79,174 +79,100 @@ body {
     color: #D92332;
 }
 
-/* Header-Présentation */
-.presentation {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-}
-
-.presentation a {
-    background-color: #262526;
-    color: #F2F2F2;
-    padding: 10px;
-    margin: 15px auto auto 15px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px #262526;
-}
-
-.presentation a:hover {
-    background-color: #D92332;
-    box-shadow: 2px 2px 5px #D92332;
-}
-
-.presentation span {
-    color: #D92332;
-    font-weight: bold;
-}
-
-.presentation h2 {
-    margin: 25px auto 15px 15px;
-    font-weight: bolder;
-}
-
-.presentation p {
-    margin: 15px 10px 15px 25px;
-    width: 70%;
-}
-
-/* Les services */
-.services {
-    background-color: #262526;
-    color: #F2F2F2;
-    margin: 25px auto 25px auto;
-}
-
-.services h2 {
-    margin: auto auto 15px 15px;
-    padding-top: 25px;
-    font-weight: bolder;
-}
-
-.service-cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-bottom: 25px;
-}
-
-.card {
-    width: 65%;
-    height: auto;
-    background-color: #F2F2F2;
-    color: #262526;
-    margin: 20px auto 20px auto;
-    display: flex;
-    box-shadow: 2px 2px 5px #D92332;
-}
-
-.card-text1, .card-text2, .card-text3 {
-    position: relative;
-    left: 20vw;
-}
-
-.after {
-    transform: translateX(-20vw);
-    transition: transform 4s linear;
-}
-
-.card img {
-    width: 25%;
-    height: 100%;
-}
-
-.card div {
-    display: flex;
-    flex-direction: column;
-}
-
-.card div h2 {
-    margin: 5px auto 5px 10px;
-}
-
-.card div p {
-    margin: 5px;
-}
-
-/* Formulaire pour laisser un avis */
-.avisForm {
+/* Contenu */
+.content {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 25px;
 }
 
-.avisForm h2 {
-    margin-bottom: 30px;
-    font-weight: 900;
-}
-
-.avisForm form {
-    width: 70%;
-}
-
-.avisForm form input {
-    width: 100%;
-    height: 25px;
-    margin-bottom: 25px;
-}
-
-.avisForm form input:focus {
-    outline: none;
-    box-shadow: 1px 1px 3px 1px #D92332;
-}
-
-.avisForm form label {
-    font-weight: bolder;
-    margin-bottom: 5px;
-}
-
-#text-area {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 20px;
-    resize: none;
-}
-
-#text-area, .avisForm form input {
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px 1px #262526;
-    border: transparent;
-}
-
-#text-area:focus {
-    outline: none;
-    box-shadow: 1px 1px 3px 1px #D92332;
-}
-
-.avisForm form  div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.avisForm form  div button {
-    width: auto;
-    padding: 5px 15px;
+.container {
+    width: 50%;
     background-color: #262526;
     color: #F2F2F2;
-    border: transparent;
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px 1px #262526;
-    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px #262526;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.avisForm form  div button:hover {
+.container h1 {
+    margin: 25px auto;
+    font-size: calc(1vw + 2rem);
+    text-align: center;
+}
+
+.container form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container form div {
+    width: 100%;
+}
+
+.container form label {
+    font-weight: bolder;
+}
+
+.container form textarea {
+    width: 100%;
+    height: 100px;
+    margin: 15px auto;
+    resize: none;
     border: none;
-    background-color: #D92332;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px #F2F2F2;
+}
+
+.container form button {
+    width: 20%;
+    border: none;
+    border-radius: 10px;
+    background-color: #F2F2F2;
+    color: #262526;
+    box-shadow: 1px 1px 3px 1px #F2F2F2;
+    padding: 15px;
+    cursor: pointer;
+    margin: 15px auto;
+}
+
+.container form textarea:focus {
+    outline: none;
     box-shadow: 1px 1px 3px 1px #D92332;
 }
 
+.container form button:hover {
+    background-color: #D92332;
+    color: #F2F2F2;
+    box-shadow: 1px 1px 3px 1px #D92332;
+}
+
+/* Contenu actuel de la page d'accueil */
+.actual-content {
+    width: 100%;
+    background-color: #262526;
+    margin: 25px auto;
+    color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actual-content div {
+    width: 60%;
+    border-top: solid 3px #F2F2F2;
+    border-bottom: solid 3px #F2F2F2;
+    text-align: center;
+    margin: 15px auto;
+    padding: 20px auto;
+}
 /* Pied de page */
 .footer {
     background-color: #262526;
@@ -328,18 +254,6 @@ body {
     transition: 0.5s;
 }
 
-@media screen and (max-width: 1500px) {
-    .card {
-        flex-wrap: wrap;
-        flex-direction: column;
-        width: 40%;
-    }
-    
-    .card img {
-        width: 100%;
-    }
-}
-
 @media screen and (max-width: 650px) {
     .img-1 {
         display: none;
@@ -351,14 +265,5 @@ body {
 
     .img-2 {
         display: block;
-    }
-
-    .card {
-        flex-direction: column;
-        width: 65%;
-    }
-
-    .card img {
-        width: 100%;
     }
 }

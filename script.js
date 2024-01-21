@@ -1,3 +1,4 @@
+//Animation de texte page d'accueil
 const cardText1 = document.querySelector('.card-text1')
 const cardText2 = document.querySelector('.card-text2')
 const cardText3 = document.querySelector('.card-text3')

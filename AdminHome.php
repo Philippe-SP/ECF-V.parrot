@@ -28,7 +28,7 @@ try {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/60d2a6fbef.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./Styles/indexStyle.css">
+    <link rel="stylesheet" href="./Styles/AdminHomeStyle.css">
     <title>Garage V.Parrot</title>
     <link rel="shortcut icon" href="./Images/icon-garage.png">
 </head>
@@ -59,65 +59,59 @@ try {
             </ul>
         </div>
     </nav>
-    <header class="presentation">
-        <?php if(isset($_SESSION['nom']) && $_SESSION['role'] === 1) { ?>
-                <a href="./AdminHome.php">Modifier les informations</a>
-        <?php }; ?>
-        <h2>Présentation</h2>
-        <p>Bienvenue dans notre garage automobile polyvalent <span>V.parrot</span>, votre destination complète pour l'entretien, la réparation, et 
-            l'acquisition de véhicules d'occasion de qualité. Nous sommes fiers d'être bien plus qu'un simple atelier - nous sommes 
-            votre partenaire de confiance pour toutes vos besoins automobiles. 
-        </p>
-        <br>
-        <p>
-            <?php echo $Content['presentation']; ?>
-        </p>
-    </header>
-    <main class="services">
-        <h2>Nos services</h2>
-        <div class="service-cards">
-            <div class="card" id="card_1">
-                <img src="./Images/img-carroserie.jpg">
-                <div class="card-text1">
+    <main class="content">
+        <div class="container">
+            <h1>Modifier la page d'accueil</h1>
+            <form action="./Back//BDDadminHome.php" method="POST">
+                <div>
+                    <label for="presentation">Partie présentation</label>
+                    <textarea type="text" name="presentation" placeholder="Actuel: voir ci-dessous"></textarea>
+                </div>
+                <div>
+                    <label for="carroserie">Partie carroserie</label>
+                    <textarea type="text" name="carroserie" placeholder="Actuel: voir ci-dessous"></textarea>
+                </div>
+                <div>
+                    <label for="mecanique">Partie mécanique</label>
+                    <textarea type="text" name="mecanique" placeholder="Actuel: voir ci-dessous"></textarea>
+                </div>
+                <div>
+                    <label for="vente">Partie vente de véhicules</label>
+                    <textarea type="text" name="vente" placeholder="Actuel: voir ci-dessous"></textarea>
+                </div>
+                <div>
+                    <label for="horraires">Partie horraires</label>
+                    <textarea type="text" name="horraires" placeholder="Séparer les horraires par des virgules, Exemple: Lun: 8h-12h/14h-18h, Mar:..."></textarea>
+                </div>
+                <button type="submit">Confirmer</button>
+            </form>
+        </div>
+        <div class="actual-content">
+            <div>
+                <h2>Présentation</h2>
+                <p>
+                    <?php echo $Content['presentation']; ?>
+                </p>
+            </div>
+            <div>
                 <h2>Carroserie</h2>
                 <p>
                     <?php echo $Content['carroserie']; ?>
                 </p>
-                </div>
             </div>
-            <div class="card" id="card_2">
-                <img src="./Images/img-mecanique.jpg">
-                <div class="card-text2">
-                <h2>Mécanique / Réparation</h2>
+            <div>
+                <h2>Mécanique</h2>
                 <p>
                     <?php echo $Content['mecanique']; ?>
                 </p>
-                </div>
             </div>
-            <div class="card" id="card_3">
-                <img src="./Images/img-ventesVehicules.jpg">
-                <div class="card-text3">
-                <h2>Ventes de véhicules d'occasion</h2>
+            <div>
+                <h2>Ventes de véhicules</h2>
                 <p>
                     <?php echo $Content['vente']; ?>
                 </p>
-                </div>
             </div>
         </div>
-    </main>
-    <main class="avisForm">
-        <h2>Laisser un avis</h2>
-        <form>
-            <label for="nom">Nom</label>
-            <input type="text" name="nom" required>
-            <label for="commentaire">Commentaire</label>
-            <input type="text" name="commentaire" required>
-            <label for="message">Message</label>
-            <textarea name="message" id="text-area" required></textarea>
-            <div>
-                <button type="submit">Envoyer</button>
-            </div>
-        </form>
     </main>
     <footer class="footer">
         <div class="top-div">

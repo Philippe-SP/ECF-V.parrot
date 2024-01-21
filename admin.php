@@ -80,7 +80,7 @@ session_start();
         </div>
         <div class="formulaire" id="vehicule">
             <h2>Ajouter un nouveau véhicule</h2>
-            <form>
+            <form action="./BDDadmin.php" method="POST" enctype="multipart/form-data">
                 <div>
                     <label for="marque">Marque</label>
                     <input type="text" name="marque">
@@ -102,16 +102,20 @@ session_start();
                     <input type="number" name="prix">
                 </div>
                 <div>
-                    <label for="image">Ajoutez une image</label>
+                    <label for="image">Ajoutez une image principale</label>
                     <input type="file" name="image" accept="image/jpeg, image/png" required>
                 </div>
                 <div>
+                    <label for="image">Ajoutez des images supplémentaires</label>
+                    <input type="file" name="imageList" accept="image/jpeg, image/png" multiple required>
+                </div>
+                <div>
                     <label for="caracteristique">Caractéristiques du véhicule</label>
-                    <input type="text" name="caracteristique">
+                    <input type="text" name="caracteristique" placeholder="Exemple: puissance, couple, etc... séparé par des virgules">
                 </div>
                 <div>
                     <label for="option">Options du véhicule</label>
-                    <input type="text" name="option">
+                    <input type="text" name="option" placeholder="séparé par des virgules">
                 </div>
                 <button type="submit">Inscrire</button>
             </form>
