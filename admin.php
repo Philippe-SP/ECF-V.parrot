@@ -5,20 +5,30 @@ $dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
 $username = 'psp';
 $password = 'PSP2001/';
 
-//Récupération des messages recus et non lu depuis la page contact
 try {
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    //Récupération des messages recus et non lu depuis la page contact
     $stmtMessages = $pdo->prepare('SELECT * FROM messages WHERE messageSee = 0');
     $stmtMessages->execute();
-
     //Changement des messages "non lu" à "lu"
     if(isset($_POST['lu'])) {
         $formMessageId = $_POST['messageId'];
         $stmtMessageLu = $pdo->prepare('UPDATE messages SET messageSee = 1 WHERE id = :id');
         $stmtMessageLu->bindParam(':id', $formMessageId);
         $stmtMessageLu->execute();
+    }
+
+    //Récupération des avis des utilisateurs
+    $stmtAvisPosted = $pdo->prepare('SELECT * FROM avis WHERE approved = 0');
+    $stmtAvisPosted->execute();
+    //Confirmation des avis pour affichage sur la page d'accueil du site
+    if(isset($_POST['approved'])) {
+        $formAvisId = $_POST['avisId'];
+        $stmtAvisApprove = $pdo->prepare('UPDATE avis SET approved = 1 WHERE id = :id');
+        $stmtAvisApprove->bindParam(':id', $formAvisId);
+        $stmtAvisApprove->execute();
     }
 } catch(PDOException $e) {
     echo 'Erreu lors de la connexion à la base de donnée'. $e->getMessage();
@@ -56,25 +66,25 @@ try {
                 <li><a href="./contact.php">Contact</a></li>
                 <?php if(!isset($_SESSION['nom'])) { ?>
                 <li><a href="./Connexion/connexion.php">Connexion</a></li>
-                <?php } else { 
-                    if($_SESSION['role'] == 1) {
-                ?>
+                <?php }else { ?>
                 <li><a href="./admin.php" style="color: #D92332">Admin</a></li>
-                <?php }; ?>
                 <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
-                <?php }; ?>
+                <?php } ?>
             </ul>
         </div>
     </nav>
     <header class="container">
         <div class="header-nav">
             <ul>
+                <?php if($_SESSION['role'] == 1) { ?>
                 <li><a href="#employe">Ajouter un employé</a></li>
+                <?php } ?>
                 <li><a href="#vehicule">Ajouter un véhicule</a></li>
                 <li><a href="#messagerie">Messagerie</a></li>
                 <li><a href="#avis">Avis des clients</a></li>
             </ul>
         </div>
+        <?php if($_SESSION['role'] == 1) { ?>
         <div class="formulaire" id="employe">
             <h2>Inscrire un nouvel employé</h2>
             <form action="./Back/BDDinscription.php" method="POST">
@@ -102,6 +112,7 @@ try {
                 ?>
             </form>
         </div>
+        <?php } ?>
         <div class="formulaire" id="vehicule">
             <h2>Ajouter un nouveau véhicule</h2>
             <form action="./BDDadmin.php" method="POST" enctype="multipart/form-data">
@@ -160,21 +171,17 @@ try {
         </div>
         <div id="avis">
             <h2>Avis des clients</h2>
+            <?php while ($avisList = $stmtAvisPosted->fetch(PDO::FETCH_ASSOC)) { ?>
             <div>
-                <h3>Nom du gars</h3>
-                <h3>Note sur 5</h3>
-                <p>Commentaire du gars</p>
+                <h3><?php echo "<i class='fa-solid fa-user'></i>".$avisList['nom']; ?></h3>
+                <h3><?php echo $avisList['note']; ?></h3>
+                <p><?php echo $avisList['commentaire']; ?></p>
+                <form action="./admin.php" method="POST">
+                    <input type="number" name="avisId" hidden value="<?php echo $avisList['id']; ?>">
+                    <button class="avisBtn" type="submit" name="approved">Confirmer le commentaire</button>
+                </form>
             </div>
-            <div>
-                <h3>Nom du gars</h3>
-                <h3>Note sur 5</h3>
-                <p>Commentaire du gars</p>
-            </div>
-            <div>
-                <h3>Nom du gars</h3>
-                <h3>Note sur 5</h3>
-                <p>Commentaire du gars</p>
-            </div>
+            <?php } ?>
         </div>
     </header>
     <footer class="footer">

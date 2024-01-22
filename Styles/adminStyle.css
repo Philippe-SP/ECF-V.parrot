@@ -280,6 +280,23 @@ body {
     border-radius: 10px;
 }
 
+.avisBtn {
+    border: none;
+    border-radius: 10px;
+    background-color: #F2F2F2;
+    color: #262526;
+    box-shadow: 1px 1px 3px 1px #F2F2F2;
+    padding: 10px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.avisBtn:hover {
+    background-color: #D92332;
+    box-shadow: 1px 1px 3px 1px #D92332;
+    color: #F2F2F2;
+}
+
 /* Pied de page */
 .footer {
     background-color: #262526;

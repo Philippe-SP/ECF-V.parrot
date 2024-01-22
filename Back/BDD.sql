@@ -65,3 +65,13 @@ CREATE TABLE messages
     message LONGTEXT NOT NULL,
     messageSee TINYINT(1) NOT NULL
 );
+
+--Avis des utilisateurs
+CREATE TABLE avis
+(
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    note INT(5) NOT NULL,
+    commentaire LONGTEXT NOT NULL,
+    approved TINYINT(1) NOT NULL
+);
