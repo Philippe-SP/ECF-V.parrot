@@ -75,3 +75,25 @@ CREATE TABLE avis
     commentaire LONGTEXT NOT NULL,
     approved TINYINT(1) NOT NULL
 );
+
+--Liste des voitures
+CREATE TABLE voitures
+(
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    marque VARCHAR(50) NOT NULL,
+    modele VARCHAR(50) NOT NULL,
+    kilometrage INT(255) NOT NULL,
+    annee_MES INT(255) NOT NULL,
+    prix INT(255) NOT NULL,
+    image_princ VARCHAR(150) NOT NULL,
+    caracteristique VARCHAR(255) NOT NULL,
+    options VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE img_list
+(
+    car_id INT(11) NOT NULL,
+    img_link VARCHAR(255) NOT NULL,
+    FOREIGN KEY (car_id) REFERENCES voitures(id),
+    PRIMARY KEY (car_id, img_link)
+);

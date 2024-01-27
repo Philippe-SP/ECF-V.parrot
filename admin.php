@@ -115,7 +115,7 @@ try {
         <?php } ?>
         <div class="formulaire" id="vehicule">
             <h2>Ajouter un nouveau véhicule</h2>
-            <form action="./BDDadmin.php" method="POST" enctype="multipart/form-data">
+            <form action="./Back//BDDvoiture.php" method="POST" enctype="multipart/form-data">
                 <div>
                     <label for="marque">Marque</label>
                     <input type="text" name="marque">
@@ -125,12 +125,12 @@ try {
                     <input type="text" name="modele">
                 </div>
                 <div>
-                    <label for="kilométrage">Kilométrage</label>
-                    <input type="number" name="kilométrage">
+                    <label for="kilometrage">Kilométrage</label>
+                    <input type="number" name="kilometrage">
                 </div>
                 <div>
                     <label for="annee-MES">Année de mise en circulation</label>
-                    <input type="date" name="annee-MES">
+                    <input type="number" min="1950" max="2024" name="annee-MES">
                 </div>
                 <div>
                     <label for="prix">Prix</label>
@@ -141,16 +141,16 @@ try {
                     <input type="file" name="image" accept="image/jpeg, image/png" required>
                 </div>
                 <div>
-                    <label for="image">Ajoutez des images supplémentaires</label>
-                    <input type="file" name="imageList" accept="image/jpeg, image/png" multiple required>
+                    <label for="imageList">Ajoutez des images supplémentaires</label>
+                    <input type="file" name="imageList[]" accept="image/jpeg, image/png" multiple="multiple" required>
                 </div>
                 <div>
                     <label for="caracteristique">Caractéristiques du véhicule</label>
                     <input type="text" name="caracteristique" placeholder="Exemple: puissance, couple, etc... séparé par des virgules">
                 </div>
                 <div>
-                    <label for="option">Options du véhicule</label>
-                    <input type="text" name="option" placeholder="séparé par des virgules">
+                    <label for="options">Options du véhicule</label>
+                    <input type="text" name="options" placeholder="séparé par des virgules">
                 </div>
                 <button type="submit">Inscrire</button>
             </form>
