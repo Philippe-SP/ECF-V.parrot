@@ -1,5 +1,20 @@
 <?php
 session_start();
+
+$dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
+$username = 'psp';
+$password = 'PSP2001/';
+
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    //Récupération des véhicules depuis la base de donnée
+    $stmtCar = $pdo->prepare('SELECT * FROM voitures');
+    $stmtCar->execute();
+} catch(PDOException $e) {
+    echo "Erreur lors de la connexion à la base de donnée". $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,54 +61,16 @@ session_start();
         <h1>Nos véhicules d'occasion</h1>
         <button type="button" class="filtre">Filtre</button>
         <div class="liste-voitures">
+            <?php while($carList = $stmtCar->fetch(PDO::FETCH_ASSOC)) { ?>
             <div>
-                <img src="https://scalethumb.leparking.fr/unsafe/331x248/smart/https://cloud.leparking.fr/2021/02/23/16/50/audi-a3-sportback-2017-audi-a3-1-6-tdi-s-line-sportback-69-wk-for-sale-in-cork-for-21-950-on-donedeal-noir_7993428002.jpg">
-                <h3>Audi A3</h3>
-                <p>Mise en circulation: 2016</p>
-                <p>Kilométrage: 95000km</p>
-                <p class="prix">18500€</p>
-                <button type="button">Infos</button>  
+                <img src="<?php echo "./voitureImg/Principales/".$carList['image_princ']; ?>">
+                <h3><?php echo $carList['marque']." ".$carList['modele']; ?></h3>
+                <p><?php echo "Mise en circulation: ".$carList['annee_MES']; ?></p>
+                <p><?php echo "Kilométrage: ".$carList['kilometrage']; ?></p>
+                <p class="prix"><?php echo $carList['prix']."€"; ?></p>
+                <a href="./detail_vehicule.php?idCar=<?php echo $carList['id']; ?>" class="infos">Infos</a>  
             </div>
-            <div>
-                <img src="https://images.caradisiac.com/images/7/5/1/5/167515/S1-presentation-ford-focus-2018-dans-la-melee-549623.jpg">
-                <h3>Ford Focus</h3>
-                <p>Mise en circulation: 2018</p>
-                <p>Kilométrage: 60000km</p>
-                <p class="prix">22000€</p> 
-                <button type="button">Infos</button>
-            </div>
-            <div>
-                <img src="https://dakarvente.com/media/annonces/pics/00ed5614c064d006f99fd8bdcf20ec1a.jpeg">
-                <h3>Peugeot 308</h3>
-                <p>Mise en circulation: 2014</p>
-                <p>Kilométrage: 120000km</p>
-                <p class="prix">8600€</p>
-                <button type="button">Infos</button>  
-            </div>
-            <div>
-                <img src="https://blogautomobile.fr/wp-content/uploads/2010/05/BMW-320d-EfficientDynamics-29.jpg">
-                <h3>BMW 320D</h3>
-                <p>Mise en circulation: 2010</p>
-                <p>Kilométrage: 110000km</p>
-                <p class="prix">19200€</p>
-                <button type="button">Infos</button>  
-            </div>
-            <div>
-                <img src="https://4.bp.blogspot.com/-6QJ8N-hsWiA/VtF7vs6Z3yI/AAAAAAAARXk/bsLly5Pe_iw/s1600/alfa-romeo-giulietta-bleu-adriatico-cobalto-blue.png">
-                <h3>Alfa Romeo Giulietta</h3>
-                <p>Mise en circulation: 2020</p>
-                <p>Kilométrage: 45000km</p>
-                <p class="prix">23700€</p>
-                <button type="button">Infos</button>  
-            </div>
-            <div>
-                <img src="https://cars.usnews.com/static/images/Auto/izmo/i284858/2016_mazda_mazda3_angularfront.jpg">
-                <h3>Mazda 3</h3>
-                <p>Mise en circulation: 2016</p>
-                <p>Kilométrage: 180000km</p>
-                <p class="prix">11500€</p>
-                <button type="button">Infos</button>  
-            </div>
+            <?php } ?>
         </div>
     </main>
     <footer class="footer">

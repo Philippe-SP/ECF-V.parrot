@@ -138,11 +138,13 @@ try {
                 </div>
                 <div>
                     <label for="image">Ajoutez une image principale</label>
-                    <input type="file" name="image" accept="image/jpeg, image/png" required>
+                    <input type="file" name="image" accept="image/jpeg, image/png" id="docP" required>
+                    <p id="img_P"></p>
                 </div>
                 <div>
                     <label for="imageList">Ajoutez des images supplémentaires</label>
-                    <input type="file" name="imageList[]" accept="image/jpeg, image/png" multiple="multiple" required>
+                    <input type="file" name="imageList[]" accept="image/jpeg, image/png" id="docS" multiple="multiple" required>
+                    <p id="showDocs"></p>
                 </div>
                 <div>
                     <label for="caracteristique">Caractéristiques du véhicule</label>
@@ -222,5 +224,6 @@ try {
         </div>
         <p>© Copyright 2023P.Pinheiro</p>
     </footer>
+    <script src="admin.js"></script>
 </body>
 </html>
