@@ -5,13 +5,16 @@ $dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
 $username = 'psp';
 $password = 'PSP2001/';
 
+require_once "./Back/BDDfiltre.php";
+
 try {
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //Récupération des véhicules depuis la base de donnée
+    //Récupération de toute les voitures de la bdd
     $stmtCar = $pdo->prepare('SELECT * FROM voitures');
     $stmtCar->execute();
+
 } catch(PDOException $e) {
     echo "Erreur lors de la connexion à la base de donnée". $e->getMessage();
 }
@@ -59,18 +62,66 @@ try {
     </nav>
     <main>
         <h1>Nos véhicules d'occasion</h1>
-        <button type="button" class="filtre">Filtre</button>
+        <button type="button" id="filtreBtn">Filtre</button>
+        <div id="filtreForm">
+            <form method="POST" id="formulaire" enctype="multipart/form-data">
+                <div class="filtreInput">
+                    <div>
+                        <h3>Kilométrage</h3>
+                        <label for="km_min">Min</label>
+                        <input type="range" id="km_min" name="km_min" class="range_input" min="10000" max="230000" step="10000" value="10000">
+                        <span id="kmMin_text"></span>
+                        <label for="km_max">Max</label>
+                        <input type="range" id="km_max" name="km_max" class="range_input" min="10000" max="230000" step="10000" value="230000">
+                        <span id="kmMax_text"></span>
+                    </div>
+                    <div>
+                        <h3>Année de mise en circualtion</h3>
+                        <label for="anneeMES_min">Min</label>
+                        <input type="range" id="anneeMES_min" name="anneeMES_min" class="range_input" min="2000" max="2024" step="1" value="2000">
+                        <span id="anneeMin_text"></span>
+                        <label for="anneeMES_max">Max</label>
+                        <input type="range" id="anneeMES_max" name="anneeMES_max" class="range_input" min="2000" max="2024" step="1" value="2024">
+                        <span id="anneeMax_text"></span>
+                    </div>
+                    <div>
+                        <h3>Prix</h3>
+                        <label for="prix_min">Min</label>
+                        <input type="range" id="prix_min" name="prix_min" class="range_input" min="5000" max="60000" step="2000" value="5000">
+                        <span id="prixMin_text"></span>
+                        <label for="prix_max">Max</label>
+                        <input type="range" id="prix_max" name="prix_max" class="range_input" min="5000" max="60000" step="2000" value="60000">
+                        <span id="prixMax_text"></span>
+                    </div>
+                </div>
+                <button type="submit" name="submit" class="formBtn" id="formBtn">Effectuer le filtre</button>
+            </form>
+        </div>
         <div class="liste-voitures">
-            <?php while($carList = $stmtCar->fetch(PDO::FETCH_ASSOC)) { ?>
-            <div>
-                <img src="<?php echo "./voitureImg/Principales/".$carList['image_princ']; ?>">
-                <h3><?php echo $carList['marque']." ".$carList['modele']; ?></h3>
-                <p><?php echo "Mise en circulation: ".$carList['annee_MES']; ?></p>
-                <p><?php echo "Kilométrage: ".$carList['kilometrage']; ?></p>
-                <p class="prix"><?php echo $carList['prix']."€"; ?></p>
-                <a href="./detail_vehicule.php?idCar=<?php echo $carList['id']; ?>" class="infos">Infos</a>  
-            </div>
-            <?php } ?>
+            <?php if(isset($_POST['submit'])) {
+                    var_dump($_GET['resultat']);
+                    while($carListFiltred = $stmtCarFiltred->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <div>
+                            <img src="<?php echo "./voitureImg/Principales/".$carListFiltred['image_princ']; ?>">
+                            <h3><?php echo $carListFiltred['marque']." ".$carListFiltred['modele']; ?></h3>
+                            <p><?php echo "Mise en circulation: ".$carListFiltred['annee_MES']; ?></p>
+                            <p><?php echo "Kilométrage: ".$carListFiltred['kilometrage']; ?></p>
+                            <hr class="separation">
+                            <p class="prix"><?php echo $carListFiltred['prix']."€"; ?></p>
+                            <a href="./detail_vehicule.php?idCar=<?php echo $carListFiltred['id']; ?>" class="infos">Infos</a>  
+                        </div>
+            <?php }} else if(!isset($_POST['submit'])) {
+                        while($carList = $stmtCar->fetch(PDO::FETCH_ASSOC)) { ?>
+                            <div>
+                                <img src="<?php echo "./voitureImg/Principales/".$carList['image_princ']; ?>">
+                                <h3><?php echo $carList['marque']." ".$carList['modele']; ?></h3>
+                                <p><?php echo "Mise en circulation: ".$carList['annee_MES']; ?></p>
+                                <p><?php echo "Kilométrage: ".$carList['kilometrage']; ?></p>
+                                <hr class="separation">
+                                <p class="prix"><?php echo $carList['prix']."€"; ?></p>
+                                <a href="./detail_vehicule.php?idCar=<?php echo $carList['id']; ?>" class="infos">Infos</a>  
+                            </div>
+            <?php }} ?>
         </div>
     </main>
     <footer class="footer">
@@ -111,5 +162,6 @@ try {
         </div>
         <p>© Copyright 2023P.Pinheiro</p>
     </footer>
+    <script src="./vehicules.js"></script>
 </body>
 </html>

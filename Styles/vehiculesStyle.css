@@ -86,7 +86,8 @@ main h1 {
     font-weight: bolder;
 }
 
-.filtre {
+/* zone de filtre */
+#filtreBtn {
     background-color: #262526;
     color: #F2F2F2;
     font-size: 20px;
@@ -94,6 +95,77 @@ main h1 {
     border-radius: 10px;
     border: transparent;
     margin: 25px auto 25px 60px;
+    box-shadow: 1px 1px 10px #262526;
+    cursor: pointer;
+}
+
+#filtreBtn:hover {
+    background-color: #D92332;
+    box-shadow: 1px 1px 10px #D92332;
+}
+
+#filtreForm {
+    display: none;
+}
+
+#filtreForm.active {
+    display: block;
+    margin-bottom: 25px;
+}
+
+#filtreForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filtreInput {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filtreInput div {
+    display: flex;
+    flex-direction: column;
+}
+
+.filtreInput div h3 {
+    margin-bottom: 15px;
+    font-weight: bolder;
+}
+
+#filtreForm span {
+    color: #D92332;
+    font-weight: bold;
+}
+
+.formBtn {
+    width: 100px;
+    margin: 20px auto;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #262526;
+    box-shadow: 1px 1px 10px #262526;
+    color: white;
+    cursor: pointer;
+}
+
+.formBtn:hover {
+    background-color: #D92332;
+    box-shadow: 1px 1px 10px #D92332;
+}
+
+input[type="range"] {
+    accent-color: #262526;
+    border: none;
+    filter: drop-shadow(0 0 5px #262526);
+}
+
+input[type="range"]:focus {
+    accent-color: #D92332;
+    filter: drop-shadow(0 0 5px #D92332);
 }
 
 .liste-voitures {
@@ -129,6 +201,11 @@ main h1 {
 
 .liste-voitures div p {
     margin: 15px auto 15px auto;
+}
+
+.separation {
+    width: 80%;
+    color: #F2F2F2;
 }
 
 .prix {

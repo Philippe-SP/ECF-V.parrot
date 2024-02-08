@@ -126,15 +126,15 @@ try {
                 </div>
                 <div>
                     <label for="kilometrage">Kilométrage</label>
-                    <input type="number" name="kilometrage">
+                    <input type="number" name="kilometrage" min="10000" max="230000">
                 </div>
                 <div>
                     <label for="annee-MES">Année de mise en circulation</label>
-                    <input type="number" min="1950" max="2024" name="annee-MES">
+                    <input type="number" min="2000" max="2024" name="annee-MES">
                 </div>
                 <div>
                     <label for="prix">Prix</label>
-                    <input type="number" name="prix">
+                    <input type="number" name="prix" min="5000" max="60000">
                 </div>
                 <div>
                     <label for="image">Ajoutez une image principale</label>
