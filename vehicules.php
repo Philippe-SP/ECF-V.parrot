@@ -151,7 +151,13 @@ try {
             <i class="fa-brands fa-x-twitter"><a href="#"></a></i>
             <i class="fa-brands fa-facebook"><a href="#"></a></i>
         </div>
-        <p>© Copyright 2023P.Pinheiro</p>
+        <div class="plus">
+            <p>© Copyright 2023P.Pinheiro</p>
+            <p> | </p>
+            <a href="#">Mentions Légales</a>
+            <p> | </p>
+            <a href="#">Politique de confidentialité</a>
+        </div>
     </footer>
     <script src="./vehicules.js"></script>
 </body>

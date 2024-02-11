@@ -97,3 +97,12 @@ CREATE TABLE img_list
     FOREIGN KEY (car_id) REFERENCES voitures(id),
     PRIMARY KEY (car_id, img_link)
 );
+
+--Ajout d'une colonne pour le sujet des messages
+ALTER TABLE messages ADD sujet VARCHAR(255) NOT NULL;
+
+--Ajout des sujets aux messages existant
+UPDATE messages SET sujet = "Autre sujet" WHERE id = 1;
+UPDATE messages SET sujet = "Autre sujet" WHERE id = 2;
+UPDATE messages SET sujet = "Autre sujet" WHERE id = 3;
+UPDATE messages SET sujet = "Audi A3" WHERE id = 4;

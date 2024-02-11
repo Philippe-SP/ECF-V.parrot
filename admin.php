@@ -19,6 +19,11 @@ try {
         $stmtMessageLu->bindParam(':id', $formMessageId);
         $stmtMessageLu->execute();
     }
+    //Récupération de tout les messages (lu et non lu)
+    if(isset($_POST['showAllMessages'])) {
+        $stmtAllMessages = $pdo->prepare('SELECT * FROM messages');
+        $stmtAllMessages->execute();
+    }
 
     //Récupération des avis des utilisateurs
     $stmtAvisPosted = $pdo->prepare('SELECT * FROM avis WHERE approved = 0');
@@ -159,17 +164,35 @@ try {
         </div>
         <div id="messagerie">
             <h2>Messagerie</h2>
-            <?php while ($messagesList = $stmtMessages->fetch(PDO::FETCH_ASSOC)) { ?>
-            <div>
-                <h3><?php echo "<i class='fa-solid fa-user'></i>".$messagesList['prenom']." ".$messagesList['nom']; ?></h3>
-                <h3><?php echo $messagesList['email']." / ".$messagesList['tel']; ?></h3>
-                <p><?php echo $messagesList['message']; ?></p>
-                <form action="./admin.php" method="POST">
-                    <input hidden type="number" name="messageId" value="<?php echo $messagesList['id']; ?>">
-                    <button class="messagerieBtn" type="submit" name="lu">Marquer comme lu</button>
-                </form>
-            </div>
-            <?php }; ?>
+            <form action="./admin.php" method="POST" class="showAllForm">
+                <button type="submit" name="showAllMessages" id="showAllBtn">Afficher les messages lu</button>
+            </form>
+            <?php if(!isset($_POST['showAllMessages'])) {
+                    while ($messagesList = $stmtMessages->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <div>
+                        <h3><?php echo "<i class='fa-solid fa-user'></i>".$messagesList['prenom']." ".$messagesList['nom']; ?></h3>
+                        <h3><?php echo $messagesList['email']." / ".$messagesList['tel']; ?></h3>
+                        <h4>Sujet: <?php echo $messagesList['sujet']; ?></h4>
+                        <p><?php echo $messagesList['message']; ?></p>
+                        <form action="./admin.php" method="POST">
+                            <input hidden type="number" name="messageId" value="<?php echo $messagesList['id']; ?>">
+                            <button class="messagerieBtn" type="submit" name="lu">Marquer comme lu</button>
+                        </form>
+                    </div>
+            <?php }} else {
+                        while ($allMessagesList = $stmtAllMessages->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <div>
+                            <h3><?php echo "<i class='fa-solid fa-user'></i>".$allMessagesList['prenom']." ".$allMessagesList['nom']; ?></h3>
+                            <h3><?php echo $allMessagesList['email']." / ".$allMessagesList['tel']; ?></h3>
+                            <p><?php echo $allMessagesList['message']; ?></p>
+                            <form action="./admin.php" method="POST">
+                                <input hidden type="number" name="messageId" value="<?php echo $allMessagesList['id']; ?>">
+                                <?php if($allMessagesList['messageSee'] === 0) { ?>
+                                    <button class="messagerieBtn" type="submit" name="lu">Marquer comme lu</button>
+                                <?php }; ?>
+                            </form>
+                        </div>
+            <?php }}; ?>
         </div>
         <div id="avis">
             <h2>Avis des clients</h2>
@@ -222,7 +245,13 @@ try {
             <i class="fa-brands fa-x-twitter"><a href="#"></a></i>
             <i class="fa-brands fa-facebook"><a href="#"></a></i>
         </div>
-        <p>© Copyright 2023P.Pinheiro</p>
+        <div class="plus">
+            <p>© Copyright 2023P.Pinheiro</p>
+            <p> | </p>
+            <a href="#">Mentions Légales</a>
+            <p> | </p>
+            <a href="#">Politique de confidentialité</a>
+        </div>
     </footer>
     <script src="admin.js"></script>
 </body>

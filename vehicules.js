@@ -6,7 +6,7 @@ const formulaire = document.getElementById('formulaire')
 const formBtn = document.getElementById('formBtn')
 const carList = document.getElementById('liste-voitures')
 const mainContent = document.getElementById('mainContent')
-const carListFiltred = document.getElementById('liste-voitures-filtred')
+const dropFilter = document.getElementById('DropFilter')
 //Variable pour afficher une croix ou le mot "filtre" selon le status du bouton
 let isToggled = false
 //Fonction d'affichage a l'appek de l'evenement
@@ -56,7 +56,7 @@ kmMin.onchange = () => {
     if(Number(kmMinValue) > Number(kmMaxValue)) {
         alert("Le kilométrage minimum est supérieur au kilométrage maximum")
     } else {
-        kmMinText.innerHTML = kmMinValue
+        kmMinText.innerText = kmMinValue
     }
 }
 kmMax.onchange = () => {
@@ -64,7 +64,7 @@ kmMax.onchange = () => {
     if(Number(kmMinValue) > Number(kmMaxValue)) {
         alert("Le kilométrage minimum est supérieur au kilométrage maximum")
     } else {
-        kmMaxText.innerHTML = kmMaxValue
+        kmMaxText.innerText = kmMaxValue
     }
 }
 
@@ -74,7 +74,7 @@ anneeMin.onchange = () => {
     if(Number(anneeMinValue) > Number(anneeMaxValue)) {
         alert("L'année de mise en circulation minimum est supérieure au kilométrage maximum")
     } else {
-    anneeMinText.innerHTML = anneeMinValue
+    anneeMinText.innerText = anneeMinValue
     }
 }
 anneeMax.onchange = () => {
@@ -82,7 +82,7 @@ anneeMax.onchange = () => {
     if(Number(anneeMinValue) > Number(anneeMaxValue)) {
         alert("L'année de mise en circulation minimum est supérieure au kilométrage maximum")
     } else {
-    anneeMaxText.innerHTML = anneeMaxValue
+    anneeMaxText.innerText = anneeMaxValue
     }
 }
 
@@ -92,7 +92,7 @@ prixMin.onchange = () => {
     if(Number(prixMinValue) > Number(prixMaxValue)) {
         alert("Le prix minimum est supérieur au kilométrage maximum")
     } else {
-    prixMinText.innerHTML = prixMinValue
+    prixMinText.innerText = prixMinValue
     }
 }
 prixMax.onchange = () => {
@@ -100,7 +100,7 @@ prixMax.onchange = () => {
     if(Number(prixMinValue) > Number(prixMaxValue)) {
         alert("Le prix minimum est supérieur au kilométrage maximum")
     } else {
-    prixMaxText.innerHTML = prixMaxValue
+    prixMaxText.innerText = prixMaxValue
     }
 }
 
@@ -173,4 +173,25 @@ formulaire.addEventListener('submit', (event) => {
 //Affichage des voitures selon le filtre
 formBtn.addEventListener('click', () => {
     carList.style.display = 'none'
+})
+
+dropFilter.addEventListener('click', () => {
+    //Réaffectation des valeurs de bases
+    kmMinValue = 10000
+    kmMaxValue = 230000
+    anneeMinValue = 2000
+    anneeMaxValue = 2024
+    prixMinValue = 5000
+    prixMaxValue = 60000
+    //Affichage des valeurs de base
+    kmMinText.innerText = kmMinValue
+    kmMaxText.innerText = kmMaxValue
+    anneeMinText.innerText = anneeMinValue
+    anneeMaxText.innerText = anneeMaxValue
+    prixMinText.innerText = prixMinValue
+    prixMaxText.innerText = prixMaxValue
+    //Affichage de toute les voitures
+    let carListFiltred = document.querySelector('.liste-voitures-filtred')
+    carListFiltred.style.display = 'none'
+    carList.style.display = 'flex'
 })

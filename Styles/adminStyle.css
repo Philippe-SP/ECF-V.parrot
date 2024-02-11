@@ -218,6 +218,26 @@ body {
     background-color: #262526;
 }
 
+.showAllForm {
+    margin: 10px auto;
+}
+
+.showAllForm button {
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: bolder;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 1px 1px 3px 1px #F2F2F2;
+}
+
+#messagerie form button:hover {
+    background-color: #D92332;
+    box-shadow: 1px 1px 3px 1px #D92332;
+}
+
 #avis {
     background-color: #F2F2F2;
 }
@@ -305,12 +325,6 @@ body {
     flex-direction: column;
 }
 
-.footer p {
-    margin: 25px auto 5px auto;
-    text-align: center;
-    font-size: 12px;
-}
-
 .top-div, .bottom-div {
     display: flex;
     width: 100%;
@@ -378,6 +392,28 @@ body {
     transition: 0.5s;
 }
 
+.plus {
+    display: flex;
+    justify-content: center;
+}
+
+.plus a {
+    text-decoration: none;
+}
+
+.plus p, .plus a {
+    margin: 25px 5px 10px 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #F2F2F2;
+}
+
+.plus a:hover {
+    color: #D92332;
+    transition: 0.5s;
+}
+
+/* Responsive */
 @media screen and (max-width: 650px) {
     .img-1 {
         display: none;

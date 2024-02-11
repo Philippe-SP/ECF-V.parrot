@@ -13,13 +13,15 @@ try {
     $formEmail = $_POST['email'];
     $formTel = $_POST['tel'];
     $formMessage = $_POST['message'];
+    $formSujet = $_POST['carName'];
 
-    $stmtNewMessage = $pdo->prepare('INSERT INTO messages (prenom, nom, email, tel, message, messageSee) VALUES (:prenom, :nom, :email, :tel, :message, 0)');
+    $stmtNewMessage = $pdo->prepare('INSERT INTO messages (prenom, nom, email, tel, message, messageSee, sujet) VALUES (:prenom, :nom, :email, :tel, :message, 0, :sujet)');
     $stmtNewMessage->bindParam(':prenom', $formPrenom);
     $stmtNewMessage->bindParam(':nom', $formNom);
     $stmtNewMessage->bindParam(':email', $formEmail);
     $stmtNewMessage->bindParam(':tel', $formTel);
     $stmtNewMessage->bindParam(':message', $formMessage);
+    $stmtNewMessage->bindParam(':sujet', $formSujet);
     if($stmtNewMessage->execute()) {
         //Renvois a la page de contact avec une variable via methode GET pour afficher un message
         header('location: http://localhost/ECF-V.parrot/contact.php?messageSend=1');

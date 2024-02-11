@@ -110,8 +110,34 @@ try {
             </div>
             <div class="boutons">
                 <a href="./vehicules.php">Retourner à la liste des véhicules</a>
-                <a href="./contact.php">Acheter ce véhicules</a>
             </div>
+        </div>
+        <div class="formContact">
+            <h2>Acheter ce véhicule</h2>
+            <form action="./Back/BDDcontact.php" method="POST">
+                <div>
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" required>
+                </div>
+                <div>
+                    <label for="prenom">Prenom</label>
+                    <input type="text" name="prenom" required>
+                </div>
+                <div>
+                    <label for="email">Adresse Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div>
+                    <label for="tel">N° de téléphone</label>
+                    <input type="tel" name="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="01 23 45 67 89" required>
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea name="message" required></textarea>
+                </div>
+                <input type="hidden" name="carName" value="<?php echo $carDetail['marque']." ".$carDetail['modele']; ?>">
+                <button type="submit">Envoyer</button>
+            </form>
         </div>
     </main>
     <footer class="footer">
@@ -150,7 +176,13 @@ try {
             <i class="fa-brands fa-x-twitter"><a href="#"></a></i>
             <i class="fa-brands fa-facebook"><a href="#"></a></i>
         </div>
-        <p>© Copyright 2023P.Pinheiro</p>
+        <div class="plus">
+            <p>© Copyright 2023P.Pinheiro</p>
+            <p> | </p>
+            <a href="#">Mentions Légales</a>
+            <p> | </p>
+            <a href="#">Politique de confidentialité</a>
+        </div>
     </footer>
 </body>
 </html>
