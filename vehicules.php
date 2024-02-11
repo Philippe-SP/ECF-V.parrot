@@ -60,7 +60,7 @@ try {
             </ul>
         </div>
     </nav>
-    <main>
+    <main id="mainContent">
         <h1>Nos véhicules d'occasion</h1>
         <button type="button" id="filtreBtn">Filtre</button>
         <div id="filtreForm">
@@ -94,33 +94,24 @@ try {
                         <span id="prixMax_text"></span>
                     </div>
                 </div>
-                <button type="submit" name="submit" class="formBtn" id="formBtn">Effectuer le filtre</button>
+                <div class="form_buttons">
+                    <button type="submit" name="submit" class="formBtn" id="formBtn">Effectuer le filtre</button>
+                    <button type="button" id="DropFilter" class="formBtn">Réinitialiser le filtre</button>
+                </div>
             </form>
         </div>
-        <div class="liste-voitures">
-            <?php if(isset($_POST['submit'])) {
-                    var_dump($_GET['resultat']);
-                    while($carListFiltred = $stmtCarFiltred->fetch(PDO::FETCH_ASSOC)) { ?>
+        <div id="liste-voitures">
+            <?php if(!isset($_POST['submit'])) {
+                    while($carList = $stmtCar->fetch(PDO::FETCH_ASSOC)) { ?>
                         <div>
-                            <img src="<?php echo "./voitureImg/Principales/".$carListFiltred['image_princ']; ?>">
-                            <h3><?php echo $carListFiltred['marque']." ".$carListFiltred['modele']; ?></h3>
-                            <p><?php echo "Mise en circulation: ".$carListFiltred['annee_MES']; ?></p>
-                            <p><?php echo "Kilométrage: ".$carListFiltred['kilometrage']; ?></p>
+                            <img src="<?php echo "./voitureImg/Principales/".$carList['image_princ']; ?>">
+                            <h3><?php echo $carList['marque']." ".$carList['modele']; ?></h3>
+                            <p><?php echo "Mise en circulation: ".$carList['annee_MES']; ?></p>
+                            <p><?php echo "Kilométrage: ".$carList['kilometrage']; ?></p>
                             <hr class="separation">
-                            <p class="prix"><?php echo $carListFiltred['prix']."€"; ?></p>
-                            <a href="./detail_vehicule.php?idCar=<?php echo $carListFiltred['id']; ?>" class="infos">Infos</a>  
+                            <p class="prix"><?php echo $carList['prix']."€"; ?></p>
+                            <a href="./detail_vehicule.php?idCar=<?php echo $carList['id']; ?>" class="infos">Infos</a>  
                         </div>
-            <?php }} else if(!isset($_POST['submit'])) {
-                        while($carList = $stmtCar->fetch(PDO::FETCH_ASSOC)) { ?>
-                            <div>
-                                <img src="<?php echo "./voitureImg/Principales/".$carList['image_princ']; ?>">
-                                <h3><?php echo $carList['marque']." ".$carList['modele']; ?></h3>
-                                <p><?php echo "Mise en circulation: ".$carList['annee_MES']; ?></p>
-                                <p><?php echo "Kilométrage: ".$carList['kilometrage']; ?></p>
-                                <hr class="separation">
-                                <p class="prix"><?php echo $carList['prix']."€"; ?></p>
-                                <a href="./detail_vehicule.php?idCar=<?php echo $carList['id']; ?>" class="infos">Infos</a>  
-                            </div>
             <?php }} ?>
         </div>
     </main>

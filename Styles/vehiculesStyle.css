@@ -110,7 +110,7 @@ main h1 {
 
 #filtreForm.active {
     display: block;
-    margin-bottom: 25px;
+    margin: auto 15px 25px 15px;
 }
 
 #filtreForm form {
@@ -138,6 +138,13 @@ main h1 {
 #filtreForm span {
     color: #D92332;
     font-weight: bold;
+}
+
+.form_buttons {
+    width: 30%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .formBtn {
@@ -168,13 +175,16 @@ input[type="range"]:focus {
     filter: drop-shadow(0 0 5px #D92332);
 }
 
-.liste-voitures {
+#liste-voitures, .liste-voitures-filtred {
     display: flex;
+}
+
+#liste-voitures, .liste-voitures-filtred {
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.liste-voitures div {
+#liste-voitures div, .liste-voitures-filtred div {
     width: 15%;
     height: auto;
     background-color: #262526;
@@ -187,19 +197,19 @@ input[type="range"]:focus {
     box-shadow: 1px 1px 10px #262526;
 }
 
-.liste-voitures div img {
+#liste-voitures div img, .liste-voitures-filtred div img {
     width: 100%;
     height: auto;
     border-radius: 15px 15px 0px 0px;
 }
 
-.liste-voitures div h3 {
+#liste-voitures div h3, .liste-voitures-filtred div h3 {
     margin-top: 20px;
     text-align: center;
     text-shadow: 1px 1px 2px #D92332;
 }
 
-.liste-voitures div p {
+#liste-voitures div p, .liste-voitures-filtred div p {
     margin: 15px auto 15px auto;
 }
 
@@ -333,7 +343,15 @@ input[type="range"]:focus {
         display: block;
     }
 
-    .liste-voitures div {
+    .filtreInput {
+        margin: auto 10px;
+    }
+
+    .form_buttons {
+        width: 100%;
+    }
+
+    #liste-voitures div, .liste-voitures-filtred div {
         width: 65%;
     }
 }

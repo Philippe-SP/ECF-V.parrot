@@ -1,7 +1,12 @@
 //Affichage du filtre au click sur le bouton
+//Déclaration des variables
 const filtreBtn = document.getElementById('filtreBtn')
 const filtreForm = document.getElementById('filtreForm')
 const formulaire = document.getElementById('formulaire')
+const formBtn = document.getElementById('formBtn')
+const carList = document.getElementById('liste-voitures')
+const mainContent = document.getElementById('mainContent')
+const carListFiltred = document.getElementById('liste-voitures-filtred')
 //Variable pour afficher une croix ou le mot "filtre" selon le status du bouton
 let isToggled = false
 //Fonction d'affichage a l'appek de l'evenement
@@ -102,6 +107,17 @@ prixMax.onchange = () => {
 //Requette AJAX pour filtrer sans rechargement de page
 let formData = new FormData()
 
+//Déclarations des variables correspondants aux elements créer apres le filtre
+let divPrincipale = document.createElement('div')
+let div = document.createElement('div')
+let img = document.createElement('img')
+let h3 = document.createElement('h3')
+let pAnnee = document.createElement('p')
+let pKm = document.createElement('p')
+let hr = document.createElement('hr')
+let pPrix = document.createElement('p')
+let a = document.createElement('a')
+
 formulaire.addEventListener('submit', (event) => {
     event.preventDefault()
     formData.append("km_min", parseInt(kmMinValue))
@@ -115,8 +131,46 @@ formulaire.addEventListener('submit', (event) => {
         body: formData
     })
     .then(response => response.json())
-    .then(response => console.log(response))
+    //.then(response => console.log(response))
+    .then(response => response.forEach(voiture => {
+        //Réaffectation des variables pour créer de nouveaux éléments à chaque itérations
+        div = document.createElement('div')
+        img = document.createElement('img')
+        h3 = document.createElement('h3')
+        pAnnee = document.createElement('p')
+        pKm = document.createElement('p')
+        hr = document.createElement('hr')
+        pPrix = document.createElement('p')
+        a = document.createElement('a')
+        //Création des div principales
+        mainContent.appendChild(divPrincipale)
+        divPrincipale.appendChild(div)
+        //Affectation des valeurs
+        img.src = `./voitureImg/Principales/${voiture.image_princ}`
+        h3.textContent = `${voiture.marque} ${voiture.modele}`
+        pAnnee.textContent = `Mise en circulation: ${voiture.annee_MES}`
+        pKm.textContent = `Kilométrage: ${voiture.kilometrage}`
+        pPrix.textContent = `${voiture.prix}€`
+        a.setAttribute('href', 'http://localhost/ECF-V.parrot/detail_vehicule.php?idCar=' + voiture.id)
+        a.textContent = 'Infos'
+        //Affectation des classes
+        divPrincipale.classList.add('liste-voitures-filtred')
+        hr.classList.add('separation')
+        pPrix.classList.add('prix')
+        a.classList.add('infos')
+        //Création des éléments dans les div
+        div.appendChild(img)
+        div.appendChild(h3)
+        div.appendChild(pAnnee)
+        div.appendChild(pKm)
+        div.appendChild(hr)
+        div.appendChild(pPrix)
+        div.appendChild(a)
+    }))
     .catch(error => 'Erreur: ' + error)
 })
 
-
+//Affichage des voitures selon le filtre
+formBtn.addEventListener('click', () => {
+    carList.style.display = 'none'
+})
