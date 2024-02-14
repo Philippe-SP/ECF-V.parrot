@@ -51,7 +51,8 @@ try {
     $stmtNewHome->bindParam(':vente', $formVente);
     $stmtNewHome->bindParam(':horraires', $formHorraires);
     if($stmtNewHome->execute()) {
-        header('location: http://localhost/ECF-V.parrot/index.php');
+        //URL pour local -> http://localhost/ECF-V.parrot/index.php
+        header('location: http://psp.alwaysdata.net/index.php');
     }
 } catch(PDOException $e) {
     echo "Erreur lors de la connexion à la base de donnée". $e->getMessage();

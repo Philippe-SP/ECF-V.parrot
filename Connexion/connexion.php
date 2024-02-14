@@ -35,7 +35,7 @@ if(isset($_POST['connexion'])) {
                 $_SESSION['nom'] = $user['nom'];
                 $_SESSION['prenom'] = $user['prenom'];
                 $_SESSION['role'] = $role['role_id'];
-                header('location: http://localhost/ECF-V.parrot/index.php');
+                header('location: https://psp.alwaysdata.net/index.php');
             }else {
                 $correctPass = false;
             }
@@ -85,7 +85,7 @@ if(isset($_POST['connexion'])) {
                 </div>
                 <div>
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" required>
+                    <input type="password" name="password" minlength="3" maxlength="10" required>
                 </div>
                 <button type="submit" name="connexion">Se connecter</button>
                 <h2>
@@ -134,9 +134,9 @@ if(isset($_POST['connexion'])) {
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="#">Mentions Légales</a>
+            <a href="../MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="#">Politique de confidentialité</a>
+            <a href="../confidentialité.php">Politique de confidentialité</a>
         </div>
     </footer>
 </body>

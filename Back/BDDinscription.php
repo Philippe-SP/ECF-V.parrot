@@ -7,8 +7,8 @@ try {
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //Récupération des données du formulaire
-    $formNom = $_POST['nom'];
-    $formPrenom = $_POST['prenom'];
+    $formNom = htmlspecialchars($_POST['nom']);
+    $formPrenom = htmlspecialchars($_POST['prenom']);
     $formEmail = $_POST['email'];
     $formPassword = $_POST['password'];
     //Hash du mot de passe
@@ -29,7 +29,8 @@ try {
         $stmtRole = $pdo->prepare('INSERT INTO roles_users(user_id, role_id) VALUES (:id, 2)');//2 étant le role d'employé
         $stmtRole->bindParam(':id', $newUser['idUser']);
         $stmtRole->execute();
-        header('location: http://localhost/ECF-V.parrot/admin.php?success=true');
+        //URL du header pour local -> http://localhost/ECF-V.parrot/admin.php?success=true
+        header('location: https://psp.alwaysdata.net/admin.php?success=true');
     } else {
         echo "Erreur lors de l'inscription de l'utilisateur";
     }

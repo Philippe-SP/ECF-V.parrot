@@ -1,44 +1,51 @@
 <?php
 session_start();
+//Vérification qu'un admin est bien connecté
+if(isset($_SESSION['nom'])) {
+    $dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
+    $username = 'psp';
+    $password = 'PSP2001/';
 
-$dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
-$username = 'psp';
-$password = 'PSP2001/';
+    try {
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-try {
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //Récupération des messages recus et non lu depuis la page contact
+        $stmtMessages = $pdo->prepare('SELECT * FROM messages WHERE messageSee = 0');
+        $stmtMessages->execute();
+        //Changement des messages "non lu" à "lu"
+        if(isset($_POST['lu'])) {
+            $formMessageId = $_POST['messageId'];
+            $stmtMessageLu = $pdo->prepare('UPDATE messages SET messageSee = 1 WHERE id = :id');
+            $stmtMessageLu->bindParam(':id', $formMessageId);
+            $stmtMessageLu->execute();
+        }
+        //Récupération de tout les messages (lu et non lu)
+        if(isset($_POST['showAllMessages'])) {
+            $stmtAllMessages = $pdo->prepare('SELECT * FROM messages');
+            $stmtAllMessages->execute();
+        }
 
-    //Récupération des messages recus et non lu depuis la page contact
-    $stmtMessages = $pdo->prepare('SELECT * FROM messages WHERE messageSee = 0');
-    $stmtMessages->execute();
-    //Changement des messages "non lu" à "lu"
-    if(isset($_POST['lu'])) {
-        $formMessageId = $_POST['messageId'];
-        $stmtMessageLu = $pdo->prepare('UPDATE messages SET messageSee = 1 WHERE id = :id');
-        $stmtMessageLu->bindParam(':id', $formMessageId);
-        $stmtMessageLu->execute();
+        //Récupération des avis des utilisateurs
+        $stmtAvisPosted = $pdo->prepare('SELECT * FROM avis WHERE approved = 0');
+        $stmtAvisPosted->execute();
+        //Confirmation des avis pour affichage sur la page d'accueil du site
+        if(isset($_POST['approved'])) {
+            $formAvisId = $_POST['avisId'];
+            $stmtAvisApprove = $pdo->prepare('UPDATE avis SET approved = 1 WHERE id = :id');
+            $stmtAvisApprove->bindParam(':id', $formAvisId);
+            $stmtAvisApprove->execute();
+        //Suppression de l'avis si le bouton "supprimer" est cliqué
+        } else if(isset($_POST['deleteCom'])) {
+            $formAvisId = $_POST['avisId'];
+            $stmtAvisDelete = $pdo->prepare('DELETE FROM avis WHERE id = :id');
+            $stmtAvisDelete->bindParam(':id', $formAvisId);
+            $stmtAvisDelete->execute();
+        }
+    } catch(PDOException $e) {
+        echo 'Erreu lors de la connexion à la base de donnée'. $e->getMessage();
     }
-    //Récupération de tout les messages (lu et non lu)
-    if(isset($_POST['showAllMessages'])) {
-        $stmtAllMessages = $pdo->prepare('SELECT * FROM messages');
-        $stmtAllMessages->execute();
-    }
-
-    //Récupération des avis des utilisateurs
-    $stmtAvisPosted = $pdo->prepare('SELECT * FROM avis WHERE approved = 0');
-    $stmtAvisPosted->execute();
-    //Confirmation des avis pour affichage sur la page d'accueil du site
-    if(isset($_POST['approved'])) {
-        $formAvisId = $_POST['avisId'];
-        $stmtAvisApprove = $pdo->prepare('UPDATE avis SET approved = 1 WHERE id = :id');
-        $stmtAvisApprove->bindParam(':id', $formAvisId);
-        $stmtAvisApprove->execute();
-    }
-} catch(PDOException $e) {
-    echo 'Erreu lors de la connexion à la base de donnée'. $e->getMessage();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +62,7 @@ try {
     <link rel="shortcut icon" href="./Images/icon-garage.png">
 </head>
 <body>
+<?php if(isset($_SESSION['nom'])) { ?>
 <nav id="navigation">
         <a href="./index.php"><img src="./Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
         <a href="./index.php"><img src="./Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
@@ -95,11 +103,11 @@ try {
             <form action="./Back/BDDinscription.php" method="POST">
                 <div>
                     <label for="nom">Nom</label>
-                    <input type="text" name="nom"  required>
+                    <input type="text" name="nom" minlength="3" maxlength="20" pattern="[a-zA-Z]+"  required>
                 </div>
                 <div>
                     <label for="prenom">Prénom</label>
-                    <input type="text" name="prenom" required>
+                    <input type="text" name="prenom" minlength="3" maxlength="20" pattern="[a-zA-Z]+" required>
                 </div>
                 <div>
                     <label for="email">Adresse Email</label>
@@ -203,6 +211,7 @@ try {
                 <p><?php echo $avisList['commentaire']; ?></p>
                 <form action="./admin.php" method="POST">
                     <input type="number" name="avisId" hidden value="<?php echo $avisList['id']; ?>">
+                    <button class="avisBtn" type="submit" name="deleteCom">Supprimer le commentaire</button>
                     <button class="avisBtn" type="submit" name="approved">Confirmer le commentaire</button>
                 </form>
             </div>
@@ -248,11 +257,16 @@ try {
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="#">Mentions Légales</a>
+            <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="#">Politique de confidentialité</a>
+            <a href="./confidentialité.php">Politique de confidentialité</a>
         </div>
     </footer>
+    <?php }else { ?>
+        <div class="noAdmin">
+            <h1>Erreur! Vous n'avez pas accès a cette page, veuillez vous connecter a un compte administrateur.</h1>
+        </div>
+    <?php } ?>
     <script src="admin.js"></script>
 </body>
 </html>

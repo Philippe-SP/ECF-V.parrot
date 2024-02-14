@@ -63,14 +63,14 @@ session_start();
         </main>
         <h2>Par formulaire de contact</h2>
         <main class="form-contact">
-            <form action="./Back/BDDcontact.php" method="POST">
+            <form action="./Back/BDDcontact.php" method="POST" id="formContact">
                 <div>
                     <label for="nom">Nom</label>
-                    <input type="text" name="nom" required>
+                    <input type="text" name="nom" id="nomContact" minlength="3" maxlength="20" pattern="[a-zA-Z]+" required>
                 </div>
                 <div>
                     <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom" required>
+                    <input type="text" name="prenom" id="prenomContact" minlength="3" maxlength="20" pattern="[a-zA-Z]+" required>
                 </div>
                 <div>
                     <label for="email">Adresse Email</label>
@@ -78,11 +78,11 @@ session_start();
                 </div>
                 <div>
                     <label for="tel">N° de téléphone</label>
-                    <input type="tel" name="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="01 23 45 67 89" required>
+                    <input type="tel" name="tel" pattern="[0-9]{10}" placeholder="Format FR +33" required>
                 </div>
                 <div>
                     <label for="message">Message</label>
-                    <textarea name="message" required></textarea>
+                    <textarea name="message" id="messageContact" minlength="3" maxlength="150" placeholder="150 caractères maximum" required></textarea>
                 </div>
                 <input type="hidden" name="carName" value="Autre sujet">
                 <button type="submit">Envoyer</button>
@@ -134,10 +134,11 @@ session_start();
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="#">Mentions Légales</a>
+            <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="#">Politique de confidentialité</a>
+            <a href="./confidentialité.php">Politique de confidentialité</a>
         </div>
     </footer>
+    <script src="./script.js"></script>
 </body>
 </html>

@@ -151,7 +151,8 @@ formulaire.addEventListener('submit', (event) => {
         pAnnee.textContent = `Mise en circulation: ${voiture.annee_MES}`
         pKm.textContent = `Kilométrage: ${voiture.kilometrage}`
         pPrix.textContent = `${voiture.prix}€`
-        a.setAttribute('href', 'http://localhost/ECF-V.parrot/detail_vehicule.php?idCar=' + voiture.id)
+        //URL pour local -> http://localhost/ECF-V.parrot/detail_vehicule.php?idCar=
+        a.setAttribute('href', './detail_vehicule.php?idCar=' + voiture.id)
         a.textContent = 'Infos'
         //Affectation des classes
         divPrincipale.classList.add('liste-voitures-filtred')

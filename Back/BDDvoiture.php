@@ -9,8 +9,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //Récupération des données du formulaire de création 
-    $formMarque = $_POST['marque'];
-    $formModele = $_POST['modele'];
+    $formMarque = htmlspecialchars($_POST['marque']);
+    $formModele = htmlspecialchars($_POST['modele']);
     $formKilometrage = (int)$_POST['kilometrage'];
     $formAnnee = (int)$_POST['annee-MES'];
     $formPrix = (int)$_POST['prix'];
@@ -59,7 +59,8 @@ try {
         $stmtCarImg->bindParam(':img_link', $img);
         $stmtCarImg->execute();
     }
-    header('location: http://localhost/ECF-V.parrot/vehicules.php');
+    //URL pour local -> http://localhost/ECF-V.parrot/vehicules.php
+    header('location: https://psp.alwaysdata.net/vehicules.php');
 } catch(PDOException $e) {
     echo "Erreur lors de la connexion à la base de donnée". $e->getMessage();
 }

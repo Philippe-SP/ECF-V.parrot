@@ -413,6 +413,23 @@ body {
     transition: 0.5s;
 }
 
+/* Message d'erreur lorsque l'utilisateur n'est pas administrateur */
+.noAdmin {
+    width: 100%;
+    height: 750px;
+    background-color: #D92332;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noAdmin h1 {
+    color: #262526;
+    font-weight: bolder;
+    font-size: 48px;
+    text-align: center;
+}
+
 /* Responsive */
 @media screen and (max-width: 650px) {
     .img-1 {

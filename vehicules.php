@@ -154,9 +154,9 @@ try {
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="#">Mentions Légales</a>
+            <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="#">Politique de confidentialité</a>
+            <a href="./confidentialité.php">Politique de confidentialité</a>
         </div>
     </footer>
     <script src="./vehicules.js"></script>

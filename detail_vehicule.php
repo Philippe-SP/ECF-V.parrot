@@ -114,14 +114,14 @@ try {
         </div>
         <div class="formContact">
             <h2>Acheter ce véhicule</h2>
-            <form action="./Back/BDDcontact.php" method="POST">
+            <form action="./Back/BDDcontact.php" method="POST" id="formDetail">
                 <div>
                     <label for="nom">Nom</label>
-                    <input type="text" name="nom" required>
+                    <input type="text" name="nom" id="nomDetail" minlength="3" maxlength="20" pattern="[a-zA-Z]+" required>
                 </div>
                 <div>
                     <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom" required>
+                    <input type="text" name="prenom" id="prenomDetail" minlength="3" maxlength="20" pattern="[a-zA-Z]+" required>
                 </div>
                 <div>
                     <label for="email">Adresse Email</label>
@@ -129,11 +129,11 @@ try {
                 </div>
                 <div>
                     <label for="tel">N° de téléphone</label>
-                    <input type="tel" name="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="01 23 45 67 89" required>
+                    <input type="tel" name="tel" pattern="[0-9]{10}" placeholder="Format FR +33" required>
                 </div>
                 <div>
                     <label for="message">Message</label>
-                    <textarea name="message" required></textarea>
+                    <textarea name="message" id="messageDetail" minlength="3" maxlength="150" placeholder="150 caractères maximum" required></textarea>
                 </div>
                 <input type="hidden" name="carName" value="<?php echo $carDetail['marque']." ".$carDetail['modele']; ?>">
                 <button type="submit">Envoyer</button>
@@ -179,10 +179,11 @@ try {
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="#">Mentions Légales</a>
+            <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="#">Politique de confidentialité</a>
+            <a href="./confidentialité.php">Politique de confidentialité</a>
         </div>
     </footer>
+    <script src="./script.js"></script>
 </body>
 </html>

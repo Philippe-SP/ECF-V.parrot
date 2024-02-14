@@ -132,13 +132,13 @@ try {
     </main>
     <main class="avisForm">
         <h2>Laisser un avis</h2>
-        <form action="./Back/BDDavis.php" method="POST">
+        <form action="./Back/BDDavis.php" method="POST" id="formIndex">
             <label for="nom">Nom</label>
-            <input type="text" name="nom" required>
+            <input type="text" name="nom" id="nomIndex" minlength="3" maxlength="20" pattern="[a-zA-Z]+" required>
             <label for="commentaire">Note</label>
-            <input type="number" name="note" placeholder="de 1 à 5" min="0" max="5" required>
+            <input type="number" name="note" id="noteIndex" placeholder="de 0 à 5" min="0" max="5" required>
             <label for="message">Commentaire</label>
-            <textarea name="commentaire" id="text-area" required></textarea>
+            <textarea name="commentaire" id="text-area" minlength="3" maxlength="150" placeholder="150 caractères maximum" required></textarea>
             <h2>
                 <?php
                     if(isset($_GET['comSend'])) {
@@ -192,9 +192,9 @@ try {
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="#">Mentions Légales</a>
+            <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="#">Politique de confidentialité</a>
+            <a href="./confidentialité.php">Politique de confidentialité</a>
         </div>
     </footer>
     <script src="script.js"></script>
