@@ -60,7 +60,7 @@ try {
         $stmtCarImg->execute();
     }
     //URL pour local -> http://localhost/ECF-V.parrot/vehicules.php
-    header('location: https://psp.alwaysdata.net/vehicules.php');
+    header('location: https://psp.alwaysdata.net/Pages/vehicules.php');
 } catch(PDOException $e) {
     echo "Erreur lors de la connexion à la base de donnée". $e->getMessage();
 }

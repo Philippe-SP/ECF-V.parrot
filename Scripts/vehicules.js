@@ -126,7 +126,7 @@ formulaire.addEventListener('submit', (event) => {
     formData.append("annee_max", parseInt(anneeMaxValue))
     formData.append("prix_min", parseInt(prixMinValue))
     formData.append("prix_max", parseInt(prixMaxValue))
-    fetch('./Back/BDDfiltre.php', {
+    fetch('../Back/BDDfiltre.php', {
         method: 'POST',
         body: formData
     })
@@ -146,7 +146,7 @@ formulaire.addEventListener('submit', (event) => {
         mainContent.appendChild(divPrincipale)
         divPrincipale.appendChild(div)
         //Affectation des valeurs
-        img.src = `./voitureImg/Principales/${voiture.image_princ}`
+        img.src = `../voitureImg/Principales/${voiture.image_princ}`
         h3.textContent = `${voiture.marque} ${voiture.modele}`
         pAnnee.textContent = `Mise en circulation: ${voiture.annee_MES}`
         pKm.textContent = `Kilométrage: ${voiture.kilometrage}`

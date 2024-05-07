@@ -50,12 +50,12 @@ try {
             ?>
             <ul>
                 <li><a href="./index.php" style="color: #D92332">Accueil</a></li>
-                <li><a href="./vehicules.php">Véhicules</a></li>
-                <li><a href="./contact.php">Contact</a></li>
+                <li><a href="./Pages/vehicules.php">Véhicules</a></li>
+                <li><a href="./Pages/contact.php">Contact</a></li>
                 <?php if(!isset($_SESSION['nom'])) { ?>
                 <li><a href="./Connexion/connexion.php">Connexion</a></li>
                 <?php }else { ?>
-                <li><a href="./admin.php">Admin</a></li>
+                <li><a href="./Pages/admin.php?token=<?php echo $_SESSION['token']; ?>">Admin</a></li>
                 <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
                 <?php } ?>
             </ul>
@@ -63,7 +63,7 @@ try {
     </nav>
     <header class="presentation">
         <?php if(isset($_SESSION['nom']) && $_SESSION['role'] === 1) { ?>
-                <a href="./AdminHome.php">Modifier les informations</a>
+                <a href="./Pages/AdminHome.php">Modifier les informations</a>
         <?php }; ?>
         <h2>Présentation</h2>
         <p>Bienvenue dans notre garage automobile polyvalent <span>V.parrot</span>, votre destination complète pour l'entretien, la réparation, et 
@@ -170,14 +170,14 @@ try {
             <div class="nav-link">
                 <ul>
                     <li><a href="./index.php">Accueil</a></li>
-                    <li><a href="./vehicules.php">Véhicules</a></li>
-                    <li><a href="./contact.php">Contact</a></li>
+                    <li><a href="./Pages/vehicules.php">Véhicules</a></li>
+                    <li><a href="./Pages/contact.php">Contact</a></li>
                     <?php if(!isset($_SESSION['nom'])) { ?>
                     <li><a href="./Connexion/connexion.php">Connexion</a></li>
                     <?php } else { 
                         if($_SESSION['role'] == 1) {
                     ?>
-                    <li><a href="#">Admin</a></li>
+                    <li><a href="./Pages/admin.php?token=<?php echo $_SESSION['token']; ?>">Admin</a></li>
                     <?php }; ?>
                     <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
                     <?php }; ?>
@@ -192,11 +192,11 @@ try {
         <div class="plus">
             <p>© Copyright 2023P.Pinheiro</p>
             <p> | </p>
-            <a href="./MentionsLegales.php">Mentions Légales</a>
+            <a href="./Pages/MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="./confidentialité.php">Politique de confidentialité</a>
+            <a href="./Pages/confidentialite.php">Politique de confidentialité</a>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="Scripts/script.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php 
 session_start();
 if(isset($_GET['logout'])) {
+    unset($_SESSION['token']);
     session_destroy();
 }
 
@@ -35,6 +36,8 @@ if(isset($_POST['connexion'])) {
                 $_SESSION['nom'] = $user['nom'];
                 $_SESSION['prenom'] = $user['prenom'];
                 $_SESSION['role'] = $role['role_id'];
+                //Création du token CSRF
+                $_SESSION['token'] = md5(time()*rand(150, 650));
                 header('location: https://psp.alwaysdata.net/index.php');
             }else {
                 $correctPass = false;

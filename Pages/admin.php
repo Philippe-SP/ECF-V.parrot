@@ -1,7 +1,7 @@
 <?php
 session_start();
 //Vérification qu'un admin est bien connecté
-if(isset($_SESSION['nom'])) {
+if(isset($_SESSION['nom']) && $_GET['token'] == $_SESSION['token']) {
     $dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
     $username = 'psp';
     $password = 'PSP2001/';
@@ -57,15 +57,15 @@ if(isset($_SESSION['nom'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/60d2a6fbef.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./Styles/adminStyle.css">
+    <link rel="stylesheet" href="../Styles/adminStyle.css">
     <title>Garage V.Parrot</title>
-    <link rel="shortcut icon" href="./Images/icon-garage.png">
+    <link rel="shortcut icon" href="../Images/icon-garage.png">
 </head>
 <body>
-<?php if(isset($_SESSION['nom'])) { ?>
+<?php if(isset($_SESSION['nom']) && $_GET['token'] == $_SESSION['token']) { ?>
 <nav id="navigation">
-        <a href="./index.php"><img src="./Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
-        <a href="./index.php"><img src="./Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
+        <a href="../index.php"><img src="../Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
+        <a href="../index.php"><img src="../Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
         <h1>Garage V.PARROT</h1>
         <div>
             <?php 
@@ -74,14 +74,14 @@ if(isset($_SESSION['nom'])) {
                 };
             ?>
             <ul>
-                <li><a href="./index.php">Accueil</a></li>
+                <li><a href="../index.php">Accueil</a></li>
                 <li><a href="./vehicules.php">Véhicules</a></li>
                 <li><a href="./contact.php">Contact</a></li>
                 <?php if(!isset($_SESSION['nom'])) { ?>
-                <li><a href="./Connexion/connexion.php">Connexion</a></li>
+                <li><a href="../Connexion/connexion.php">Connexion</a></li>
                 <?php }else { ?>
-                <li><a href="./admin.php" style="color: #D92332">Admin</a></li>
-                <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
+                <li><a href="./admin.php?token=<?php echo $_SESSION['token']; ?>" style="color: #D92332">Admin</a></li>
+                <li><a href="../Connexion/connexion.php?logout=1">Déconnexion</a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -100,7 +100,7 @@ if(isset($_SESSION['nom'])) {
         <?php if($_SESSION['role'] == 1) { ?>
         <div class="formulaire" id="employe">
             <h2>Inscrire un nouvel employé</h2>
-            <form action="./Back/BDDinscription.php" method="POST">
+            <form action="../Back/BDDinscription.php" method="POST">
                 <div>
                     <label for="nom">Nom</label>
                     <input type="text" name="nom" minlength="3" maxlength="20" pattern="[a-zA-Z]+"  required>
@@ -128,7 +128,7 @@ if(isset($_SESSION['nom'])) {
         <?php } ?>
         <div class="formulaire" id="vehicule">
             <h2>Ajouter un nouveau véhicule</h2>
-            <form action="./Back//BDDvoiture.php" method="POST" enctype="multipart/form-data">
+            <form action="../Back//BDDvoiture.php" method="POST" enctype="multipart/form-data">
                 <div>
                     <label for="marque">Marque</label>
                     <input type="text" name="marque">
@@ -167,7 +167,7 @@ if(isset($_SESSION['nom'])) {
                     <label for="options">Options du véhicule</label>
                     <input type="text" name="options" placeholder="séparé par des virgules">
                 </div>
-                <button type="submit">Inscrire</button>
+                <button type="submit">Ajouter</button>
             </form>
         </div>
         <div id="messagerie">
@@ -234,17 +234,17 @@ if(isset($_SESSION['nom'])) {
             </div>
             <div class="nav-link">
                 <ul>
-                    <li><a href="./index.php">Accueil</a></li>
+                    <li><a href="../index.php">Accueil</a></li>
                     <li><a href="./vehicules.php">Véhicules</a></li>
                     <li><a href="./contact.php">Contact</a></li>
                     <?php if(!isset($_SESSION['nom'])) { ?>
-                    <li><a href="./Connexion/connexion.php">Connexion</a></li>
+                    <li><a href="../Connexion/connexion.php">Connexion</a></li>
                     <?php } else { 
                         if($_SESSION['role'] == 1) {
                     ?>
-                    <li><a href="#">Admin</a></li>
+                    <li><a href="./admin.php?token=<?php echo $_SESSION['token']; ?>">Admin</a></li>
                     <?php }; ?>
-                    <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
+                    <li><a href="../Connexion/connexion.php?logout=1">Déconnexion</a></li>
                     <?php }; ?>
                 </ul>
             </div>
@@ -259,14 +259,18 @@ if(isset($_SESSION['nom'])) {
             <p> | </p>
             <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="./confidentialité.php">Politique de confidentialité</a>
+            <a href="./confidentialite.php">Politique de confidentialité</a>
         </div>
     </footer>
-    <?php }else { ?>
+    <?php }else if(!isset($_SESSION['nom'])) { ?>
         <div class="noAdmin">
             <h1>Erreur! Vous n'avez pas accès a cette page, veuillez vous connecter a un compte administrateur.</h1>
         </div>
+    <?php } else if($_GET['token'] != $_SESSION['token']) { ?>
+        <div class="noAdmin">
+            <h1>Token invalide ou périmé.</h1>
+        </div>
     <?php } ?>
-    <script src="admin.js"></script>
+    <script src="../Scripts/admin.js"></script>
 </body>
 </html>

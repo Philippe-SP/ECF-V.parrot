@@ -25,7 +25,7 @@ try {
     if($stmtNewMessage->execute()) {
         //Renvois a la page de contact avec une variable via methode GET pour afficher un message
         //URL pour local -> http://localhost/ECF-V.parrot/contact.php?messageSend=1
-        header('location: https://psp.alwaysdata.net/contact.php?messageSend=1');
+        header('location: https://psp.alwaysdata.net/Pages/contact.php?messageSend=1');
     }
 } catch(PDOException $e) {
     echo "Erreur lors de la connexion à la base de donnée". $e->getMessage();

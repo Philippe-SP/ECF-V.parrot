@@ -44,7 +44,8 @@ try {
     };
 
     //Modification de la base de donnée en fonction du formulaire
-    $stmtNewHome = $pdo->prepare('UPDATE accueil SET presentation = :presentation, carroserie = :carroserie, mecanique = :mecanique, vente = :vente, horraires = :horraires WHERE id = 1');
+    $stmtNewHome = $pdo->prepare('UPDATE accueil SET presentation = :presentation, carroserie = :carroserie, mecanique = :mecanique, 
+    vente = :vente, horraires = :horraires WHERE id = 1');
     $stmtNewHome->bindParam(':presentation', $formPresentation);
     $stmtNewHome->bindParam(':carroserie', $formCarroserie);
     $stmtNewHome->bindParam(':mecanique', $formMecanique);

@@ -28,14 +28,14 @@ try {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/60d2a6fbef.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./Styles/AdminHomeStyle.css">
+    <link rel="stylesheet" href="../Styles/AdminHomeStyle.css">
     <title>Garage V.Parrot</title>
-    <link rel="shortcut icon" href="./Images/icon-garage.png">
+    <link rel="shortcut icon" href="../Images/icon-garage.png">
 </head>
 <body>
     <nav id="navigation">
-        <a href="./index.php"><img src="./Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
-        <a href="./index.php"><img src="./Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
+        <a href="../index.php"><img src="../Images/logo-garage.png" class="img-1" width="100%" height="auto"></a>
+        <a href="../index.php"><img src="../Images/logo-garage_titre.png" class="img-2" width="100%" height="auto"></a>
         <h1>Garage V.PARROT</h1>
         <div>
             <?php 
@@ -44,17 +44,17 @@ try {
                 };
             ?>
             <ul>
-                <li><a href="./index.php" style="color: #D92332">Accueil</a></li>
+                <li><a href="../index.php" style="color: #D92332">Accueil</a></li>
                 <li><a href="./vehicules.php">Véhicules</a></li>
                 <li><a href="./contact.php">Contact</a></li>
                 <?php if(!isset($_SESSION['nom'])) { ?>
-                <li><a href="./Connexion/connexion.php">Connexion</a></li>
+                <li><a href="../Connexion/connexion.php">Connexion</a></li>
                 <?php } else { 
                     if($_SESSION['role'] == 1) {
                 ?>
-                <li><a href="./admin.php">Admin</a></li>
+                <li><a href="./admin.php?token=<?php echo $_SESSION['token']; ?>">Admin</a></li>
                 <?php }; ?>
-                <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
+                <li><a href="../Connexion/connexion.php?logout=1">Déconnexion</a></li>
                 <?php }; ?>
             </ul>
         </div>
@@ -62,7 +62,7 @@ try {
     <main class="content">
         <div class="container">
             <h1>Modifier la page d'accueil</h1>
-            <form action="./Back//BDDadminHome.php" method="POST">
+            <form action="../Back//BDDadminHome.php" method="POST">
                 <div>
                     <label for="presentation">Partie présentation</label>
                     <textarea type="text" name="presentation" placeholder="Actuel: voir ci-dessous"></textarea>
@@ -127,17 +127,17 @@ try {
             </div>
             <div class="nav-link">
                 <ul>
-                    <li><a href="./index.php">Accueil</a></li>
+                    <li><a href="../index.php">Accueil</a></li>
                     <li><a href="./vehicules.php">Véhicules</a></li>
                     <li><a href="./contact.php">Contact</a></li>
                     <?php if(!isset($_SESSION['nom'])) { ?>
-                    <li><a href="./Connexion/connexion.php">Connexion</a></li>
+                    <li><a href="../Connexion/connexion.php">Connexion</a></li>
                     <?php } else { 
                         if($_SESSION['role'] == 1) {
                     ?>
-                    <li><a href="#">Admin</a></li>
+                    <li><a href="./admin.php">Admin</a></li>
                     <?php }; ?>
-                    <li><a href="./Connexion/connexion.php?logout=1">Déconnexion</a></li>
+                    <li><a href="../Connexion/connexion.php?logout=1">Déconnexion</a></li>
                     <?php }; ?>
                 </ul>
             </div>
@@ -152,9 +152,9 @@ try {
             <p> | </p>
             <a href="./MentionsLegales.php">Mentions Légales</a>
             <p> | </p>
-            <a href="./confidentialité.php">Politique de confidentialité</a>
+            <a href="./confidentialite.php">Politique de confidentialité</a>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="../Scripts/script.js"></script>
 </body>
 </html>

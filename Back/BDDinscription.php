@@ -30,7 +30,7 @@ try {
         $stmtRole->bindParam(':id', $newUser['idUser']);
         $stmtRole->execute();
         //URL du header pour local -> http://localhost/ECF-V.parrot/admin.php?success=true
-        header('location: https://psp.alwaysdata.net/admin.php?success=true');
+        header('location: https://psp.alwaysdata.net/Pages/admin.php?success=true');
     } else {
         echo "Erreur lors de l'inscription de l'utilisateur";
     }
