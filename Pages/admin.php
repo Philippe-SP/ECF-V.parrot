@@ -1,10 +1,10 @@
 <?php
 session_start();
+
+require_once "../logs.php";
+
 //Vérification qu'un admin est bien connecté
 if(isset($_SESSION['nom']) && $_GET['token'] == $_SESSION['token']) {
-    $dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
-    $username = 'psp';
-    $password = 'PSP2001/';
 
     try {
         $pdo = new PDO($dsn, $username, $password);

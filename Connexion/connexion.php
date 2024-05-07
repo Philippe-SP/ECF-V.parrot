@@ -5,9 +5,7 @@ if(isset($_GET['logout'])) {
     session_destroy();
 }
 
-$dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
-$username = 'psp';
-$password = 'PSP2001/';
+require_once "../logs.php";
 
 if(isset($_POST['connexion'])) {
     try {

@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-$dsn = 'mysql:host=mysql-psp.alwaysdata.net;dbname=psp_v-parrot';
-$username = 'psp';
-$password = 'PSP2001/';
-
+require_once "../logs.php";
 require_once "../Back/BDDfiltre.php";
 
 try {
